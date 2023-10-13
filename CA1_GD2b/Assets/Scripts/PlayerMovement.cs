@@ -9,7 +9,8 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D body; 
     private Animator anim; 
     private bool grounded; 
-    private bool facingRight = true; 
+    private bool facingRight = true;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -21,8 +22,12 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         float horizontalInput = Input.GetAxisRaw("Horizontal");
-        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
-        anim.SetBool("Walk", horizontalInput != 0);
+
+        if(Input.GetKey(KeyCode.LeftArrow))
+        {   
+            body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
+            anim.SetTrigger("Walk");
+        }
 
         if((horizontalInput > 0 && !facingRight)||(horizontalInput < 0 && facingRight))
         {
@@ -33,14 +38,14 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
-
-
     }
+
     private void Jump(){
         body.velocity = new Vector2(body.velocity.x,jumpHeight);
         grounded = false;
         anim.SetTrigger("jump");
     }
+
     private void OnCollisionEnter2D(Collision2D other){
         if(other.gameObject.CompareTag("Ground")){
             grounded = true;
