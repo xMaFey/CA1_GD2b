@@ -4,53 +4,52 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 10F;
-    public float jumpHeight = 7F; 
-    private Rigidbody2D body; 
-    private Animator anim; 
-    private bool grounded; 
-    private bool facingRight = true;
+    public float moveSpeed = 5F;
+    public Rigidbody2D rb;
+    public Animator anim;
 
-    // Start is called before the first frame update
-    void Awake()
+    // Vector for walk movement
+    private Vector2 movement;
+
+    // Vector for last move (idle) movement
+    private Vector2 lastMoveDirection;
+
+    void Start()
     {
-     body = GetComponent<Rigidbody2D>();
-     anim = GetComponent<Animator>();   
+        anim = GetComponent<Animator>();
+
+    }
+    
+    // Called once per frame
+    void Update()
+    {
+        // Store last move direction when stop moving
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
+
+        if((moveX == 0 && moveY == 0) && (movement.x != 0 || movement.y != 0))
+        {
+            lastMoveDirection = movement;
+        }
+
+        // Stores location in the Vector2 movement
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
+
+        movement.Normalize();
+
+
+        // Set Animators parameters
+        anim.SetFloat("Horizontal_Walk", movement.x);
+        anim.SetFloat("Vertical_Walk", movement.y);
+        anim.SetFloat("Speed", movement.sqrMagnitude);
+        anim.setFloat("Horizontal_Idle", lastMoveDirection.x);
+        anim.setFloat("Vertical_Idle", lastMoveDirection.y);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float horizontalInput = Input.GetAxisRaw("Horizontal");
-        body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
-        anim.SetBool("Walk", horizontalInput != 0);
-
-        if((horizontalInput > 0 && !facingRight)||(horizontalInput < 0 && facingRight))
-        {
-            Flip();
-        }
-
-        if(Input.GetKey(KeyCode.Space)&&grounded)
-        {
-            Jump();
-        }
-    }
-
-    private void Jump(){
-        body.velocity = new Vector2(body.velocity.x,jumpHeight);
-        grounded = false;
-        anim.SetTrigger("Jump");
-    }
-
-    private void OnCollisionEnter2D(Collision2D other){
-        if(other.gameObject.CompareTag("Ground")){
-            grounded = true;
-        }
-    }
-    private void Flip(){
-        Vector3 currentScale = gameObject.transform.localScale;
-        currentScale.x *= -1;
-        gameObject.transform.localScale = currentScale; 
-        facingRight = !facingRight; 
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 }
