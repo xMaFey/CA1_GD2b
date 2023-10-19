@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     public float moveSpeed = 5F;
-    public Rigidbody2D rb;
-    public Animator anim;
+    private Rigidbody2D rb;
+    private Animator anim;
 
     // Vector for walk movement
     private Vector2 movement;
@@ -14,16 +14,17 @@ public class PlayerMovement : MonoBehaviour
     // Vector for last move (idle) movement
     private Vector2 lastMoveDirection;
 
-    void Start()
+    void Awake()
     {
         anim = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody2D>();
 
     }
     
     // Called once per frame
     void Update()
     {
-        // Store last move direction when stop moving
+        // Store last move direction when I stop moving
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
@@ -38,13 +39,12 @@ public class PlayerMovement : MonoBehaviour
 
         movement.Normalize();
 
-
         // Set Animators parameters
         anim.SetFloat("Horizontal_Walk", movement.x);
         anim.SetFloat("Vertical_Walk", movement.y);
         anim.SetFloat("Speed", movement.sqrMagnitude);
-        anim.setFloat("Horizontal_Idle", lastMoveDirection.x);
-        anim.setFloat("Vertical_Idle", lastMoveDirection.y);
+        anim.SetFloat("Horizontal_Idle", lastMoveDirection.x);
+        anim.SetFloat("Vertical_Idle", lastMoveDirection.y);
     }
 
     // Update is called once per frame
