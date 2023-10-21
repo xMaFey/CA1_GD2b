@@ -71,12 +71,19 @@ public class PlayerMovement : MonoBehaviour
         if(movement.x > 0)
         {   
             swordAttack.attackDirection = SwordAttack.AttackDirection.right;
-            print(swordAttack.attackDirection);
         }
         else if(movement.x < 0)
         {
             swordAttack.attackDirection = SwordAttack.AttackDirection.left;
-            print(swordAttack.attackDirection);
+        }
+
+        if(movement.y > 0)
+        {
+            swordAttack.attackDirection = SwordAttack.AttackDirection.up;
+        }
+        else if(movement.y < 0)
+        {
+            swordAttack.attackDirection = SwordAttack.AttackDirection.down;
         }
     }
 
@@ -87,9 +94,14 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetTrigger("Sword_Attack");
             swordAttack.Attack();
-            print("Attack!");
         }
         
+    }
+
+    public void EndSwordAttack()
+    {
+        UnlockMovement();
+        swordAttack.StopAttack();
     }
 
     // Locks movement while player attacks

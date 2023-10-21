@@ -5,27 +5,21 @@ using UnityEngine;
 public class SwordAttack : MonoBehaviour
 {
 
-    public Collider2D swordColliderHorizontal;
+    public Collider2D swordCollider;
     
+    public float swordDamage = 3;
 
     public enum AttackDirection
     {
         right, left, up, down
     }
 
+    public Transform swordColliderFlip;
+
     public AttackDirection attackDirection;
-
-    // Start is called before the first frame update
-    public void Start()
-    {
-
-    }
-
-
 
     public void Attack()
     {
-        print("Funguju");
         switch(attackDirection)
         {
             case AttackDirection.right:
@@ -34,6 +28,12 @@ public class SwordAttack : MonoBehaviour
             case AttackDirection.left:
                 AttackLeft();
                 break;
+            case AttackDirection.up:
+                AttackUp();
+                break;
+            case AttackDirection.down:
+                AttackDown();
+                break;
         }
 
     }
@@ -41,29 +41,44 @@ public class SwordAttack : MonoBehaviour
     private void AttackRight()
     {   
         print("Attack Right");
-        swordColliderHorizontal.enabled = true;
-        transform.eulerAngles = new Vector3(0, 0, 0);
+        swordCollider.enabled = true;
+        swordColliderFlip.eulerAngles = new Vector3(0, 0, 0);
     }
 
     private void AttackLeft()
     {
         print("Attack Left");
-        swordColliderHorizontal.enabled = true;
-        transform.eulerAngles = new Vector3(0, 0, 180);
+        swordCollider.enabled = true;
+        swordColliderFlip.eulerAngles = new Vector3(0, 0, 180);
     }
 
     private void AttackUp()
     {
-
+        print("Attack Up");
+        swordCollider.enabled = true;
+        swordColliderFlip.eulerAngles = new Vector3(0, 0, 90);
     }
 
     private void AttackDown()
     {
-
+        print("Attack Down");
+        swordCollider.enabled = true;
+        swordColliderFlip.eulerAngles = new Vector3(0, 0, 270);
     }
 
     public void StopAttack()
     {
-        swordColliderHorizontal.enabled = false;
+        swordCollider.enabled = false;
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        print("Enter");
+        if(other.tag == "Enemy")
+        {
+            Enemy enemy = other.GetComponent<Enemy>();
+            enemy.TakeDamage(swordDamage);
+        }
+
     }
 }
