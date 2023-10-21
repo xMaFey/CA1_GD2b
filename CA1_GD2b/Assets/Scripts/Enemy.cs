@@ -33,14 +33,6 @@ public class Enemy : MonoBehaviour
 
     void Update()
     {
-        Vector3 direction = player.position - transform.position;
-        direction.Normalize();
-        enemyMovement = direction;
-    }
-
-    void FixedUpdate()
-    {
-        Movement(enemyMovement);
     }
 
     public float Health
@@ -54,12 +46,6 @@ public class Enemy : MonoBehaviour
         {
             return health;
         }
-    }
-
-    void Movement(Vector2 direction)
-    {
-        //anim.SetFloat("Slime_Speed", slimeMovement.sqrMagnitude);
-        rb.MovePosition((Vector2)transform.position + (direction * moveSpeed * Time.deltaTime));
     }
 
     void Die()
