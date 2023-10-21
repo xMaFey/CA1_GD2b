@@ -13,6 +13,12 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int maxEnemies = 5;
     private int currentEnemies = 0;
 
+    //private Animator anim;
+
+    void Awake()
+    {
+        //anim = GetComponent<Animator>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +39,7 @@ public class EnemySpawner : MonoBehaviour
     }
 
     public void EnemyDied()
-    {
+    {   
         currentEnemies--;
     }
 }
