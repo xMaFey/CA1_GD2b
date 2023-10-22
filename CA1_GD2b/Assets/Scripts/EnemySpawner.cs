@@ -13,14 +13,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private int maxEnemies = 5;
     private int currentEnemies = 0;
 
-    //private Animator anim;
+    public GameObject player;
 
-    void Awake()
-    {
-        //anim = GetComponent<Animator>();
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
         InvokeRepeating("SpawnEnemy", spawnRate, spawnRate);
@@ -33,7 +27,7 @@ public class EnemySpawner : MonoBehaviour
         GameObject spawnedEnemy = Instantiate(enemyPrefab, spawnPoint.position, Quaternion.identity);
 
         Enemy enemy = spawnedEnemy.GetComponent<Enemy>();
-        enemy.Initialize(this);
+        enemy.Initialize(this, player);
 
         currentEnemies++;
     }

@@ -13,10 +13,11 @@ public class Enemy : MonoBehaviour
 
     private Vector2 enemyMovement;
     private Rigidbody2D rb;
-    public Rigidbody2D player;
+    public GameObject player;
 
-    public void Initialize(EnemySpawner spawnerReference)
+    public void Initialize(EnemySpawner spawnerReference, GameObject player)
     {
+        this.player = player;
         print("initializeSpawner");
         spawner = spawnerReference;
     }
@@ -31,8 +32,17 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    void Update()
+    void FixedUpdate()
     {
+        SlimeMove();
+    }
+
+    void SlimeMove()
+    {
+        Vector3 direction = player.transform.position - transform.position;
+        direction.Normalize();
+
+        rb.MovePosition(transform.position + (direction * moveSpeed * Time.fixedDeltaTime));
     }
 
     public float Health
