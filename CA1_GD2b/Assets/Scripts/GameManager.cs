@@ -6,18 +6,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager gameInstance;
 
     [Header("Game stance")]
     public bool isPaused;
     public bool isGameOver;
 
-    // Start is called before the first frame update
+    // This wont get destoyed through the game
     void Awake()
     {
-        if(instance == null)
+        if (gameInstance == null)
         {
-            instance = this;
+         gameInstance = this;
             DontDestroyOnLoad(gameObject);
         }
         else
@@ -27,23 +27,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.R))
-        {
-            RestartGame();
-        }
-    }
-
+    // Game over function
     public void GameOver()
     {
         isGameOver = true;
         // This is where I choose what happens when game is game over
+        SceneManager.LoadScene("GameOver");
     }
 
+    // Restarts the game
     public void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene("GameScene");
     }
 }
