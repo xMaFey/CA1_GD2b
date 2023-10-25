@@ -2,9 +2,10 @@ MY VIDEO PRESENTATION:
 
 
 SPRITES THAT I AM USING:
+
 https://game-endeavor.itch.io/mystic-woods
 
-LINKS ON VIDEOS FROM WHICH I USED CODE:
+I TOOK CODE FROM PROJECTS THAT WE DID IN CLASS AND FROM THE VIDEOS LINKED BELLOW:
 
 https://www.youtube.com/watch?v=34fgsJ2-WzM&ab_channel=ZeroPatienceGameDev
 
