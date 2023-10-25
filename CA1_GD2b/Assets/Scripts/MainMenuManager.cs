@@ -13,6 +13,12 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private String optionsSceneName = "Options";
 
+    void awake()
+    {
+        AudioManager.audioInstance.PlayBackgroundMusic();
+        AudioManager.audioInstance.SetBackgroundMusicVolume(0.5F);
+    }
+
     // What happens when I click on the buttons in Main Menu
     public void StartGame()
     {

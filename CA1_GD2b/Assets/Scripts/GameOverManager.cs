@@ -16,11 +16,15 @@ public class GameOverManager : MonoBehaviour
     // What happens when I click on the buttons in Main Menu
     public void ReStartGame()
     {
+        AudioManager.audioInstance.PlayAmbientMusic();
+        AudioManager.audioInstance.SetAmbientMusicVolume(1F);
         SceneManager.LoadScene(gameSceneName);
     }
 
     public void MainMenu()
     {
+        AudioManager.audioInstance.PlayBackgroundMusic();
+        AudioManager.audioInstance.SetBackgroundMusicVolume(0.5F);
         SceneManager.LoadScene(mainMenuSceneName);
     }
 

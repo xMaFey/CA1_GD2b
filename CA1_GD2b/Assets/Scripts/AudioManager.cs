@@ -5,15 +5,12 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager audioInstance;
-    public AudioClip footstepsSound;
     public AudioClip swordAttackSound;
-    public AudioClip backgroundMusic;
     public AudioClip ambientMusic;
+    public AudioClip backgroundMusic;
     public AudioClip slimeSpawn;
     public AudioClip slimeHit;
-    public AudioClip button;
-    public AudioClip playerDamaged;
-    public AudioClip playerDied;
+    public AudioClip playerHit;
     public AudioClip gameOver;
 
 
@@ -46,15 +43,10 @@ public class AudioManager : MonoBehaviour
         ambientMusicSource.clip = ambientMusic;
         ambientMusicSource.loop = true;
         ambientMusicSource.Play();
-
     }
 
 
     // Created functions which play the sounds for each thing
-    public void PlayFootstepSound()
-    {
-        soundEffectSource.PlayOneShot(footstepsSound);
-    }
     
     public void PlaySwordAttackSound()
     {
@@ -69,6 +61,16 @@ public class AudioManager : MonoBehaviour
     public void PlaySlimeSpawnSound()
     {
         soundEffectSource.PlayOneShot(slimeSpawn);
+    }
+
+    public void PlayPlayerHitSound()
+    {
+        soundEffectSource.PlayOneShot(playerHit);
+    }
+
+    public void PlayGameOverSound()
+    {
+        soundEffectSource.PlayOneShot(gameOver);
     }
 
     // Background sound functions

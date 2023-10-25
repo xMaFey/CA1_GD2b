@@ -26,22 +26,30 @@ public class GameManager : MonoBehaviour
     // Game over function
     public void GameOver()
     {
+        AudioManager.audioInstance.PlayBackgroundMusic();
+        AudioManager.audioInstance.SetBackgroundMusicVolume(0.1F);
         SceneManager.LoadScene("GameOver");
     }
 
     // Restarts the game
     public void RestartGame()
     {
+        AudioManager.audioInstance.PlayAmbientMusic();
+        AudioManager.audioInstance.SetAmbientMusicVolume(1F);
         SceneManager.LoadScene("GameScene");
     }
 
     public void MainMenu()
     {
+        AudioManager.audioInstance.PlayBackgroundMusic();
+        AudioManager.audioInstance.SetBackgroundMusicVolume(0.5F);
         SceneManager.LoadScene("MainMenu");
     }
 
     public void OpenOptions()
     {
+        AudioManager.audioInstance.PlayBackgroundMusic();
+        AudioManager.audioInstance.SetBackgroundMusicVolume(0.5F);
         SceneManager.LoadScene("Options");
     }
 

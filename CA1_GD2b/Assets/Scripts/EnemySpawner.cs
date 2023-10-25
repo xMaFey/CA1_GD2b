@@ -22,6 +22,7 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] private TMP_Text displaySlimeKilled;
 
+    // Setter and Getter for kill count
     public float SlimeKilled
     {
         set

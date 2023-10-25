@@ -24,10 +24,11 @@ public class PlayerMovement : MonoBehaviour
 
     [SerializeField] SwordAttack swordAttack;
 
-    [SerializeField] private float health = 10;
+    [SerializeField] private float health = 2;
 
     [SerializeField] private TMP_Text displayHealth;
 
+    // Setter and Getter for players Health
     public float Health
     {
         set
@@ -61,6 +62,8 @@ public class PlayerMovement : MonoBehaviour
         {
             Attack();
         }
+
+        AudioManager.audioInstance.PauseBackgroundMusic();
 
         FlipSwordHitbox();
     }
@@ -101,11 +104,6 @@ public class PlayerMovement : MonoBehaviour
 
         // Moves the rigid body of the player = moves the player
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-
-        if(movement.sqrMagnitude > 0.1)
-        {
-            AudioManager.audioInstance.PlayFootstepSound();
-        }
     }
 
     // I have collider for sword attack and I am rotating it around a player depending in which direction the player is facing
@@ -161,18 +159,22 @@ public class PlayerMovement : MonoBehaviour
         canMove = true;
     }
 
+    // Player take damage from slime
     public void TakeDamage(float damage)
     {
         Health -= damage;
         print(health);
         if(Health <= 0)
         {
+            AudioManager.audioInstance.PlayGameOverSound();
+            AudioManager.audioInstance.StopAmbientMusic();
             anim.SetTrigger("Player_Died");
             SceneManager.LoadScene("GameOver");
         }
         else
         {
             anim.SetTrigger("Player_Hit");
+            AudioManager.audioInstance.PlayPlayerHitSound();
         }
     }
 }

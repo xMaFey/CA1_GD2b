@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
 
     }
 
+    // Timer for slimes attack
     void Update()
     {
         lastAttack += Time.deltaTime;
@@ -103,6 +104,9 @@ public class Enemy : MonoBehaviour
         }
     }
 
+
+    // Checks if slime collider and player collider are touching, if yes the slime take damage to player
+    // There is a timer so the slime wont kill the player instantely
     private void OnCollisionStay2D(Collision2D other)
     {
         if(other.gameObject.tag == "Player")

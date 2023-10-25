@@ -261,7 +261,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Horizontal_Walk
     m_Mirror: 0
-  m_BlendParameter: Horizontal_Walk
+  m_BlendParameter: Horizontal_Idle
   m_BlendParameterY: Horizontal_Walk
   m_MinThreshold: -1
   m_MaxThreshold: 1
@@ -597,8 +597,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Horizontal_Walk
     m_Mirror: 0
-  m_BlendParameter: Horizontal_Walk
-  m_BlendParameterY: Vertical_Walk
+  m_BlendParameter: Horizontal_Idle
+  m_BlendParameterY: Vertical_Idle
   m_MinThreshold: 0
   m_MaxThreshold: 1
   m_UseAutomaticThresholds: 1
