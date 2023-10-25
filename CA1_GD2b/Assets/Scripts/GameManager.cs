@@ -8,10 +8,6 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager gameInstance;
 
-    [Header("Game stance")]
-    public bool isPaused;
-    public bool isGameOver;
-
     // This wont get destoyed through the game
     void Awake()
     {
@@ -30,8 +26,6 @@ public class GameManager : MonoBehaviour
     // Game over function
     public void GameOver()
     {
-        isGameOver = true;
-        // This is where I choose what happens when game is game over
         SceneManager.LoadScene("GameOver");
     }
 
@@ -39,5 +33,20 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene("GameScene");
+    }
+
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    public void OpenOptions()
+    {
+        SceneManager.LoadScene("Options");
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

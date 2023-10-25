@@ -13,15 +13,6 @@ public class MainMenuManager : MonoBehaviour
     [SerializeField]
     private String optionsSceneName = "Options";
 
-    // void awake()
-    // {
-    //     backgroundMusicSource = gameObject.AddComponent<AudioSource>();
-
-    //     backgroundMusicSource.clip = backgroundMusic;
-    //     backgroundMusicSource.loop = true;
-    //     backgroundMusicSource.Play();
-    // }
-
     // What happens when I click on the buttons in Main Menu
     public void StartGame()
     {

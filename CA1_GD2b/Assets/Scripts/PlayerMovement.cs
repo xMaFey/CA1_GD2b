@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using TMPro;
 
 public class PlayerMovement : MonoBehaviour
@@ -166,12 +167,12 @@ public class PlayerMovement : MonoBehaviour
         print(health);
         if(Health <= 0)
         {
-            // anim.SetTrigger("Slime_Died");
-            GameManager.gameInstance.GameOver();
+            anim.SetTrigger("Player_Died");
+            SceneManager.LoadScene("GameOver");
         }
         else
         {
-            // anim.SetTrigger("Slime_Damaged");
+            anim.SetTrigger("Player_Hit");
         }
     }
 }
